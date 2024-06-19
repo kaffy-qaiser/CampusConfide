@@ -36,7 +36,7 @@ Campus Confide is a whistle-blower application designed to help report any uneth
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/CampusConfide.git
+   git clone https://github.com/kaffy-qaiser/CampusConfide.git
    cd CampusConfide
    ```
 
