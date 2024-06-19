@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@unimodules/core": "^7.1.2",
+    "bootstrap": "^3.4.1"
+  }
+}

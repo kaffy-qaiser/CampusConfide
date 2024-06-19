@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Help</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .navbar-custom {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+
+        .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+
+        .filter {
+            align-items: center;
+        }
+
+        .reports-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .report {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.2s;
+        }
+
+        .report:hover {
+            transform: scale(1.05);
+        }
+
+        .report-title {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .submission-type {
+            font-weight: bold;
+            color: #0056b3;
+        }
+
+        .admin-notes {
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .note p {
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #004299;
+        }
+
+        a, a:hover {
+            text-decoration: none;
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">Campus-Confide</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Homepage</a>
+            </li>
+            <li class="nav-item">
+                {% if not user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_report'%}">Create Report</a>
+                </li>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+
+    <div class="reports-container">
+        {% block content %}
+        <div class="filter">
+            <div class="d-flex justify-content-center align-items-end mt-4">
+                <form method="get" action="{% url 'report_list' %}" class="d-flex">
+                    <h4 class="mb-0 mr-2">Filter</h4>
+                    <input type="text" name="title" value="{{ request.GET.title }}" placeholder="Search from title" class="mr-2">
+                    <button class="btn btn-primary mr-2" type="submit" name="search">Search</button>
+                </form>
+                <a class="btn btn-outline-primary" href="{% url 'report_list' %}">Reset</a>
+            </div>
+        </div>
+            
+    </div>
+
+    <div class="reports-container">
+        {% for report in reports %}
+            <div class="report">    
+                <h2 class="report-title">Report {{ report.id }}: {{ report.title }}</h2>
+                <p class="mb-2">Created on: {{ report.created_at|date:"F d, Y H:i" }}</p>
+                <p>Report Type: {{ report.get_issue_type_display }}</p>
+                <p class="submission-type">Report Status: {{ report.submission_status }}</p>
+                <a href="{% url 'one_report' report.id %}">View Report Details</a>
+            </div>
+        {% endfor %}
+        {% endblock %}
+    </div>
+{% include 'hooknowsapp/footer.html' %}
+</body>
+</html>
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar-custom {
+            background-color: #0056b3;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-custom .navbar-brand, .navbar-custom .nav-link {
+            color: #ffffff;
+        }
+
+        .container {
+            padding-top: 2rem;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary, .btn-secondary {
+            margin-right: 10px;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border-color: #004299;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #545b62;
+        }
+        .max-size {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        @media (max-width: 768px) {
+            .max-size {
+                max-width: 400px;
+            }
+        }
+        
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand" href="#">Campus-Confide</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container max-size">
+        {% if user.is_staff %}
+            <h2>Hello, Admin {{ user.first_name }}p!</h2>
+            <div class="mt-3 mb-3">Manage incoming reports here.</div>
+            <p class="mt-3 mb-3">Explore and manage academic-related student issues with ease. Update statuses, and post resolutions to ensure a smooth educational experience.</p>
+        {% elif user.is_anonymous %}
+            <h2>Welcome, Anonymous User!</h2>
+            <div class="mt-3 mb-3">Encountering an issue? Let us know!</div>
+            <p class="mt-3 mb-3">Your academic journey should be seamless. If you stumble upon any issues, have feedback, or suggestions, this is the place to share them. Your input is invaluable in enhancing the academic experience for everyone.</p>
+        {% else %}
+            <h2>Welcome, {{ user.first_name }}!</h2>
+            <div class="mt-3 mb-3">Encountering an issue? Let us know!</div>
+            <p class="mt-3 mb-3">Your academic journey should be seamless. If you stumble upon any issues, have feedback, or suggestions, this is the place to share them. Your input is invaluable in enhancing the academic experience for everyone.</p>
+        {% endif %}
+
+        {% if notifications %}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Report Update!</h4>
+                {% for notification in notifications|slice:":5" %}
+                    <p>{{ notification.message }}</p>
+                {% endfor %}
+                <hr>
+                <p class="mb-0">View your reports to see any updates.</p>
+            </div>
+        {% endif %}
+
+        {% if user.is_anonymous %}
+            <a class="btn btn-primary" href="{% url 'create_report' %}" role="button">Create Report</a>
+        {% else %}
+            {% if user.is_staff %}
+                <a class="btn btn-primary" href="{% url 'view_reports' %}" role="button">View Reports</a>
+            {% else %}
+                <div class="small-container">
+                    <a class="btn btn-primary" href="{% url 'create_report' %}" role="button">Create Report</a>
+                    <a class="btn btn-secondary" href="{% url 'view_user_reports' %}" role="button">View User Reports</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+{% include 'hooknowsapp/footer.html' %}
+</body>
+</html>

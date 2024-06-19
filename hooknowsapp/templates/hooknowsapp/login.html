@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Google Sign In</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .card {
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn {
+            border-radius: 0.375rem;
+        }
+        .btn-danger {
+            background-color: #ea4335;
+            border-color: #ea4335;
+        }
+        .btn-danger:hover {
+            background-color: #d93025;
+            border-color: #d93025;
+        }
+        .btn-primary {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+        }
+        .btn-primary:hover {
+            background-color: #1358b4;
+            border-color: #1358b4;
+        }
+        h2 {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card my-5">
+                    <div class="card-body">
+                        {% load socialaccount %}
+                        <h2 class="text-center mb-4">Campus-Confide</h2>
+                        <div class="text-center mb-3">
+                            <a href="/accounts/google/login/?process=login&next=/" class="btn btn-danger px-4">Login With Google</a>
+                            <a href="{% url 'home' %}" class="btn btn-primary px-4 ml-2">Continue Anonymously</a>
+                        </div>
+
+                        {% if user.is_authenticated %}
+                        <h2 class="text-center mb-4">Welcome {{ user.username }}</h2>
+                        <div class="text-center mb-3">
+                            <a href="{% url 'logout' %}" class="btn btn-secondary">Logout</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    {% include 'hooknowsapp/footer.html' %}
+</body>
+</html>

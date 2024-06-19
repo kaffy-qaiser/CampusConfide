@@ -1,0 +1,74 @@
+
+:root {
+    --black: #0b0c10;
+    --dark-gray: #1f2833;
+    --gray: #c5c6c7;
+    --mint:#66fcf1;
+    --dark-mint:#45a293;
+  }
+  
+
+.container{
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container button {
+    background-color: white;
+    color:#0b0c10;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.general-button {
+    background-color: white;
+    align-items:flex-start;
+    border: none;
+    cursor: pointer;
+}
+
+.small-container{
+    display: flex;
+    flex-direction: row;
+    
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  form label {
+    display: block; 
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form input[type="text"],
+  form textarea,
+  form input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form textarea {
+    height: 150px;
+  }
+  
+  form input[type="file"] {
+    border: none;
+  }
+
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} 
