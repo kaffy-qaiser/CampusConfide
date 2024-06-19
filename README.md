@@ -20,6 +20,7 @@ Campus Confide is a whistle-blower application designed to help report any uneth
 ## Features
 
 - Anonymous reporting of unethical actions
+- Admin side to monitor and provide updates
 - Secure storage of reports
 - Google OAuth integration for user creation
 - Continuous testing through GitHub
