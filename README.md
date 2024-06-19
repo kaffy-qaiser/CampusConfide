@@ -1,8 +1,6 @@
-Sure! Here is a README file for Campus Confide:
+# Campus Confide
 
 ---
-
-# Campus Confide
 
 Campus Confide is a whistle-blower application designed to help report any unethical actions conducted by students, teaching assistants, or professors within a university campus. The application ensures anonymity and security for the users, providing a safe platform to report misconduct.
 
@@ -110,8 +108,5 @@ Please ensure your code adheres to our coding standards and includes appropriate
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ---
-
-Feel free to customize this README file further according to your project's specific needs and preferences.
 
