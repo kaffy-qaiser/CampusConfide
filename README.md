@@ -34,7 +34,6 @@ Campus Confide is a whistle-blower application designed to help report any uneth
 - **Cloud Storage:** AWS S3
 - **Hosting:** Heroku
 - **Authentication:** Google OAuth
-- **Development Methodology:** Agile
 
 ## Installation
 
